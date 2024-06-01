@@ -2,4 +2,4 @@
 Author: Jessica Batbayar
 
 # Description
-Final project for UCSD DSC80
+Final project for UCSD DSC80 for Spring 2024
