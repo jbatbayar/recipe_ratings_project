@@ -12,6 +12,7 @@ This subjective experience raises an interesting hypothesis—perhaps the pleasu
 We start with 2 different datasets:
 
 Dataset `recipes` has 83782 rows with 12 columns, each row containing information on a unique recipe. The columns are as follows:
+
 | Column	| Description |
 | --------- | ------------|
 | `'name'`	| Recipe name |
