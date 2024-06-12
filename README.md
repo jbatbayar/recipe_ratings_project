@@ -51,7 +51,7 @@ I took a few steps to clean the data I have:
    - Merged dataset now has 234429 rows with 17 columns.
 
 2. Checked if the data types of columns in the merged dataset are suitable.
-   - Here are teh data types for all columns:
+   - Here are the data types for all columns:
    - | Column	| Description |
 | :-------- | :----------- |
 | `'name'`	| object |
@@ -160,7 +160,57 @@ I looked into the relationship between the number of ingredients a recipe requir
 ---
 ## Assessment of Missingness
 
+### NMAR Analysis
+In the dataset, columns `'description'`, `'review'`, `'rating'` had numerous values that were missing. 
 
+I believe that `'description'` is NMAR. It is possible for a user to not include a description for their recipe because they of the complexity of it (it might have either been too simple that it is self-explanatory or too complex that they did not want to spend time writing it.
+
+Additional information that could be helpful are `'name'`,`'n_steps'`, `'minutes'` of the recipe because we might be able to assume the complexity of the cooking process for that certain recipe.
+
+
+### Missingness Dependency
+For this step, I will be examining if the missingness of the `'review'` column is dependent on the `'calories'` column and the '`minutes'` column.
+
+- Calories and Review
+
+  I believed that whether or not a user writes a review on a recipe depends on their satisfaction with the recipe. User might write a review if their experience was extreme (either rating 1 or 5) and might choose not to write anything because their experience was nothing out of normal. This is why I chose `'avg_rating'` as a column that `'review'`'s missingness depends on.
+
+  ***Null Hypothesis:*** Missingness of reviews does not depend on the calories of the recipe.
+  ***Alternate Hypothesis:*** Missingness of reviews does depend on the calories of the recipe.
+  ***TestStatistic:*** Difference of means in the `'calories'` of the distribution of the group with missing reviews and the distribution of the group without missing reviews.
+  ***Significance Level:*** 0.05
+
+  Here is the table with average ratings in each group.
+  
+  | missing_review   |   calories |
+|:-----------------|-----------:|
+| False            |    419.45  |
+| True             |    738.719 |
+
+  The observed test statistic was **319.26908562595804**.
+
+  I ran a permutation test by shuffling the missingness label of review for 1000 times to collect simulated difference in means.
+
+  The p-value was 0.003, and since it is lower than our significance level 0.05, we reject the null hypothesis. The missingness of `'review'` does depend on `'calories'` column.
+  
+- Time taken and Review
+  ***Null Hypothesis:*** Missingness of reviews does not depend on the time taken for the recipe.
+  ***Alternate Hypothesis:*** Missingness of reviews does depend on the time taken for the recipe.
+  ***TestStatistic:*** Difference of means in the `'minutes'` of the distribution of the group with missing reviews and the distribution of the group without missing reviews.
+  ***Significance Level:*** 0.05
+
+Here is the table with average time taken in each group:
+   | missing_review   |   minutes |
+|:-----------------|----------:|
+| False            |   106.781 |
+| True             |   140.345 |
+
+The observed test statistic was **33.56346811767196**.
+
+I ran a permutation test by shuffling the missingness label of review for 1000 times to collect simulated difference in means.
+
+
+  The p-value was 0.092, and it is higher than our significance level 0.05, so we fail to reject the null hypothesis. We do not have enough evidence to reject that the missingness of `'review'` does depend on `'minutes'`.
 
 ---
 ## Hypothesis Testing
