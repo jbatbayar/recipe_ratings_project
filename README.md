@@ -46,8 +46,9 @@ I took a few steps to clean the data I have:
 1. Left merged `recipes` dataset with `interactions` on `'id'` (`recipes`) and `'recipe_id'` for `interactions`.
 Merged dataset now has 234429 rows with 17 columns.
 2. Checked if the data types of columns in the merged dataset are suitable.
+   
 | Column	| Description |
-| --------- | ------------|
+| -------- | ----------- |
 | `'name'`	| object |
 | `'id'`	| int64 |
 | `'minutes'`	| int64 |
@@ -65,6 +66,7 @@ Merged dataset now has 234429 rows with 17 columns.
 |`'date'`	| object |
 |`'rating'`	| float64 |
 | `'review'` | object |
+
 3. Filled ratings of 0 with np.nan as ratings range from 1 to 5.
 We would be able to get a good 'avg_rating' estimate as it will ignore np.Nan as default when calculating. If ratings were kept as 0s, it would have affected the average rating for a recipe when it shouldn't have been included.
 4. Found avg_rating per recipe, as a Series
@@ -82,6 +84,9 @@ As a result of these 8 data cleaning steps, the dataframe now has 234429 rows an
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 |         6 |               9 |        5 |            5 |      194.8 |
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 |         6 |               9 |        5 |            5 |      194.8 |
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 |         6 |               9 |        5 |            5 |      194.8 |
+
+### Univariate Analysis
+I examined the distribution of calories in a recipe below. I put them into 6 bins so that I will be able to see if there are any extreme values in this column that might affect my analysis in the future.  
 
 ---
 ## Assessment of Missingness
