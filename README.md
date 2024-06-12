@@ -14,7 +14,7 @@ We start with 2 different datasets:
 Dataset `recipes` has 83782 rows with 12 columns, each row containing information on a unique recipe. The columns are as follows:
 
 | Column	| Description |
-| --------- | ------------|
+| :--------- | :------------|
 | `'name'`	| Recipe name |
 | `'id'`	| Recipe ID |
 | `'minutes'`	| Minutes to prepare recipe |
@@ -31,7 +31,7 @@ Dataset `recipes` has 83782 rows with 12 columns, each row containing informatio
 Dataset `interactions` contains 731927 rows with 5 columns, each row containing a review and rating by users for a recipe.
 
 | Column	| Description |
-| --------- | ------------|
+| :--------- | :------------|
 | `'user_id'`	| User ID |
 | `'recipe_id'`	| Recipe ID |
 |`'date'`	| Date of interaction |
@@ -50,7 +50,7 @@ Merged dataset now has 234429 rows with 17 columns.
 2. Checked if the data types of columns in the merged dataset are suitable.
    
 | Column	| Description |
-| -------- | ----------- |
+| :-------- | :----------- |
 | `'name'`	| object |
 | `'id'`	| int64 |
 | `'minutes'`	| int64 |
