@@ -29,6 +29,7 @@ Dataset `recipes` has 83782 rows with 12 columns, each row containing informatio
 | `'n_ingredients'` | Number of ingredients in recipe |
 
 Dataset `interactions` contains 731927 rows with 5 columns, each row containing a review and rating by users for a recipe.
+
 | Column	| Description |
 | --------- | ------------|
 | `'user_id'`	| User ID |
