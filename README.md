@@ -45,8 +45,10 @@ The the most relevant column for this investigation is definitely the `calories 
 ---
 ## Data Cleaning and Exploratory Data Analysis
 I took a few steps to clean the data I have:
+
 1. Left merged `recipes` dataset with `interactions` on `'id'` (`recipes`) and `'recipe_id'` for `interactions`.
 Merged dataset now has 234429 rows with 17 columns.
+
 2. Checked if the data types of columns in the merged dataset are suitable.
    
 | Column	| Description |
@@ -71,10 +73,15 @@ Merged dataset now has 234429 rows with 17 columns.
 
 3. Filled ratings of 0 with np.nan as ratings range from 1 to 5.
 We would be able to get a good 'avg_rating' estimate as it will ignore np.Nan as default when calculating. If ratings were kept as 0s, it would have affected the average rating for a recipe when it shouldn't have been included.
+
 4. Found avg_rating per recipe, as a Series
+
 5. Added `'avg_rating'` Series back to the dataset by merging.
+
 6. Converted `'submitted'` and  `'date'`, which were objects into datetime.
+
 7. Turned `'nutrition'` column from string into list.
+
 8. Created `'calories'` column in the dataset, taking the first element of each record in the `'nutrition'` column.
 
 As a result of these 8 data cleaning steps, the dataframe now has 234429 rows and 19 columns, with each column in a most appropriate data type. Here are the first 5 rows of my cleaned dataset with the most relevant columns for my question:
@@ -88,10 +95,20 @@ As a result of these 8 data cleaning steps, the dataframe now has 234429 rows an
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 |         6 |               9 |        5 |            5 |      194.8 |
 
 ### Univariate Analysis
-I examined the distribution of calories in a recipe below. I put them into 6 bins so that I will be able to see if there are any extreme values in this column that might affect my analysis in the future.  
+I examined the distribution of calories in a recipe below. I put them into 6 bins so that I will be able to see if there are any extreme values in this column that might affect my analysis in the future. From the plot below, we can see that there are 954 records where the recipe has 0-5 calories and 81 records with 10000+ calories. Though not high in quantity, I think that these values can be considered outliers.
 
 <iframe
   src="assets/calories_dist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+### Bivariate Analysis
+For this analysis, I looked at the relationship between calories and ratings. I used a small dataset that contained records of recipes and ratings which had 5-10000 calories. I computed the mean calories for this dataset, which was equal to 416.3725968915825, and added a new column `'more_than_mean'` which has `True` for records in which their value in `'calories'` is higher than the computed mean and `False` for those which were equal or lower than the mean. Looking at the graph below, we see that calories of recipes that were rated 1, 2, or 3 were more likely to be higher than the mean while the calories of recipes with the rating of 4 and 5 were more likely to be lower than the mean.
+
+<iframe
+  src="assets/bivar_meancals.html"
   width="800"
   height="600"
   frameborder="0"
