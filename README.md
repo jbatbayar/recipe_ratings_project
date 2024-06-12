@@ -79,7 +79,7 @@ We would be able to get a good 'avg_rating' estimate as it will ignore np.Nan as
 
 As a result of these 8 data cleaning steps, the dataframe now has 234429 rows and 19 columns, with each column in a most appropriate data type. Here are the first 5 rows of my cleaned dataset with the most relevant columns for my question:
 
-| name                                 |     id |   minutes | submitted           |   n_steps |   n_ingredients |   rating |   avg_rating |   calories |
+| name | id |  minutes  |  submitted  |   n_steps |   n_ingredients |   rating |   avg_rating |   calories |
 |:-------------------------------------|-------:|----------:|:--------------------|----------:|----------------:|---------:|-------------:|-----------:|
 | 1 brownies in the world    best ever | 333281 |        40 | 2008-10-27 00:00:00 |        10 |               9 |        4 |            4 |      138.4 |
 | 1 in canada chocolate chip cookies   | 453467 |        45 | 2011-04-11 00:00:00 |        12 |              11 |        5 |            5 |      595.1 |
