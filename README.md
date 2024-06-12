@@ -9,6 +9,7 @@ In this data science project, we delve into the intricate relationship between t
 We start with 2 different datasets, one that contains recipes and the other contains reviews and ratings for the recipes by users.
 
 | Column	| Description |
+| --------- | ------------|
 | 'name'	| Recipe name |
 | 'id'	| Recipe ID |
 |'minutes'	| Minutes to prepare recipe |
