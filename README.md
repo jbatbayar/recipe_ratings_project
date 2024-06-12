@@ -41,7 +41,7 @@ Dataset `interactions` contains 731927 rows with 5 columns, each row containing 
 
 This project delves into these datasets to investigate a compelling question: **Do people tend to rate high-calorie recipes more favorably than their low-calorie counterparts?** This is a significant question because while recipes high in calories might be preferred over low-calorie recipes by a lot of people, the health concern the choices bring is worth considering.
 
-The the most relevant column for this investigation is definitely the `calories (#)` value in the `nutrition` column. I disregarded all the remaining values from the column. Other relevant columns would be `rating` and `avg_rating`.  
+The the most relevant column for this investigation is definitely the `'calories (#)'` value in the `'nutrition'` column. I disregarded all the remaining values from the column. Other relevant columns would be `'rating'` and `'avg_rating'`.  
 
 ---
 ## Data Cleaning and Exploratory Data Analysis
@@ -177,13 +177,13 @@ For this step, I will be examining if the missingness of the `'review'` column i
 
   ***Null Hypothesis:*** Missingness of reviews does not depend on the calories of the recipe.
   ***Alternate Hypothesis:*** Missingness of reviews does depend on the calories of the recipe.
-  ***TestStatistic:*** Difference of means in the `'calories'` of the distribution of the group with missing reviews and the distribution of the group without missing reviews.
+  ***TestStatistic:*** Difference of means in the `'calories'` of the distribution of the group with missing reviews (`'missing_review'` == True) and the distribution of the group without missing reviews (`'missing_review'` == False).
   ***Significance Level:*** 0.05
 
   Here is the table with average ratings in each group.
   
   | missing_review   |   calories |
-|:-----------------|-----------:|
+|:-----------------|:-----------|
 | False            |    419.45  |
 | True             |    738.719 |
 
@@ -200,14 +200,15 @@ For this step, I will be examining if the missingness of the `'review'` column i
   The p-value was 0.003, and since it is lower than our significance level 0.05, we reject the null hypothesis. The missingness of `'review'` does depend on `'calories'` column.
   
 - Time taken and Review
+  
   ***Null Hypothesis:*** Missingness of reviews does not depend on the time taken for the recipe.
   ***Alternate Hypothesis:*** Missingness of reviews does depend on the time taken for the recipe.
-  ***TestStatistic:*** Difference of means in the `'minutes'` of the distribution of the group with missing reviews and the distribution of the group without missing reviews.
+  ***TestStatistic:*** Difference of means in the `'minutes'` of the distribution of the group with missing reviews (`'missing_review'` == True) and the distribution of the group without missing reviews (`'missing_review'` == False).
   ***Significance Level:*** 0.05
 
 Here is the table with average time taken in each group:
-   | missing_review   |   minutes |
-|:-----------------|----------:|
+| missing_review   |   minutes |
+|:-----------------|:----------|
 | False            |   106.781 |
 | True             |   140.345 |
 
@@ -222,7 +223,7 @@ I ran a permutation test by shuffling the missingness label of review for 1000 t
 ></iframe>
 
 
-  The p-value was 0.092, and it is higher than our significance level 0.05, so we fail to reject the null hypothesis. We do not have enough evidence to reject that the missingness of `'review'` does depend on `'minutes'`.
+  The p-value was 0.092, and it is higher than our significance level 0.05, so we fail to reject the null hypothesis. We do not have enough evidence to reject that the missingness of `'review'` is dependent on `'minutes'`.
 
 ---
 ## Hypothesis Testing
