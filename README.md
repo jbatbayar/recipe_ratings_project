@@ -88,6 +88,13 @@ As a result of these 8 data cleaning steps, the dataframe now has 234429 rows an
 ### Univariate Analysis
 I examined the distribution of calories in a recipe below. I put them into 6 bins so that I will be able to see if there are any extreme values in this column that might affect my analysis in the future.  
 
+<iframe
+  src="assets/calories_dist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 ---
 ## Assessment of Missingness
 
