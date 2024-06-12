@@ -2,5 +2,4 @@ remote_theme: pages-themes/tactile@v0.2.0
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 title: Reviewing the relationship between Rating and the Amount of Calories of Recipes
-description: Final project for UCSD DSC80 for Spring 2024 \
-Author: Jessica Batbayar
+description: Final project for UCSD DSC80 for Spring 2024 <br /> Author: Jessica Batbayar
