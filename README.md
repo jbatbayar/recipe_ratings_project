@@ -1,5 +1,4 @@
 ## Reviewing the relationship between Rating and the Amount of Calories of Recipes
-<h1 style="text-align: center;">Reviewing the relationship between Rating and the Amount of Calories of Recipes</h1>
 By Jessica Batbayar(jbatbayar@ucsd.edu)
 
 ---
