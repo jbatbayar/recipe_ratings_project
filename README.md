@@ -190,6 +190,12 @@ For this step, I will be examining if the missingness of the `'review'` column i
   The observed test statistic was **319.26908562595804**.
 
   I ran a permutation test by shuffling the missingness label of review for 1000 times to collect simulated difference in means.
+  <iframe
+  src="assets/missingness1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
   The p-value was 0.003, and since it is lower than our significance level 0.05, we reject the null hypothesis. The missingness of `'review'` does depend on `'calories'` column.
   
@@ -208,6 +214,12 @@ Here is the table with average time taken in each group:
 The observed test statistic was **33.56346811767196**.
 
 I ran a permutation test by shuffling the missingness label of review for 1000 times to collect simulated difference in means.
+  <iframe
+  src="assets/missingness2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 
   The p-value was 0.092, and it is higher than our significance level 0.05, so we fail to reject the null hypothesis. We do not have enough evidence to reject that the missingness of `'review'` does depend on `'minutes'`.
