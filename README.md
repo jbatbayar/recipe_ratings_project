@@ -227,8 +227,14 @@ I ran a permutation test by shuffling the missingness label of review for 1000 t
 
 ---
 ## Hypothesis Testing
+I will be performing a permutation test with the following hypotheses, test statistic, and significance level:
 
+**Null Hypothesis:** The ratings of recipes with more and less calories than mean are from the same distibution.
+**Alternate Hypothesis:**: The mean rating of recipes with calories lower than the mean is higher than the mean rating of recipes with calories greater than the mean.
+**Test statistic:** Difference in group means (mean of ratings of recipes with calories more than average - mean of ratings of recipes with calories less than average)
+**Significance level:** 0.01
 
+Using the `'more_than_mean'` column from the Bivariate analysis and `'rating'` from our dataset, I computed the difference in mean ratings 1000 times. 
 
 ---
 ## Framing a Prediction Problem
