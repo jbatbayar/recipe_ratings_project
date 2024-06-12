@@ -28,6 +28,7 @@ Dataset `recipes` has 83782 rows with 12 columns, each row containing informatio
 | `'ingredients'` | Ingredients used for recipe |
 | `'n_ingredients'` | Number of ingredients in recipe |
 
+
 Dataset `interactions` contains 731927 rows with 5 columns, each row containing a review and rating by users for a recipe.
 
 | Column	| Description |
@@ -47,11 +48,11 @@ The the most relevant column for this investigation is definitely the `calories 
 I took a few steps to clean the data I have:
 
 1. Left merged `recipes` dataset with `interactions` on `'id'` (`recipes`) and `'recipe_id'` for `interactions`.
-Merged dataset now has 234429 rows with 17 columns.
+   - Merged dataset now has 234429 rows with 17 columns.
 
 2. Checked if the data types of columns in the merged dataset are suitable.
-   
-| Column	| Description |
+   - Here are teh data types for all columns:
+   - | Column	| Description |
 | :-------- | :----------- |
 | `'name'`	| object |
 | `'id'`	| int64 |
@@ -84,6 +85,7 @@ We would be able to get a good 'avg_rating' estimate as it will ignore np.Nan as
 
 8. Created `'calories'` column in the dataset, taking the first element of each record in the `'nutrition'` column.
 
+
 As a result of these 8 data cleaning steps, the dataframe now has 234429 rows and 19 columns, with each column in a most appropriate data type. Here are the first 5 rows of my cleaned dataset with the most relevant columns for my question:
 
 | name | id |  minutes  |  submitted  |   n_steps |   n_ingredients |   rating |   avg_rating |   calories |
@@ -93,6 +95,7 @@ As a result of these 8 data cleaning steps, the dataframe now has 234429 rows an
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 |         6 |               9 |        5 |            5 |      194.8 |
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 |         6 |               9 |        5 |            5 |      194.8 |
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 |         6 |               9 |        5 |            5 |      194.8 |
+
 
 ### Univariate Analysis
 I examined the distribution of calories in a recipe below. I put them into 6 bins so that I will be able to see if there are any extreme values in this column that might affect my analysis in the future. From the plot below, we can see that there are 954 records where the recipe has 0-5 calories and 81 records with 10000+ calories. Though not high in quantity, I think that these values can be considered outliers.
