@@ -1,5 +1,17 @@
+## Reviewing the relationship between Rating and the Amount of Calories of Recipes
+
 ## Introduction
-In this project,
-### Cleaning
-Yea
-### aksdljf
+
+## Cleaning and EDA
+
+## Assessment of Missingness
+
+## Hypothesis Testing
+
+## Framing a Prediction Problem
+
+## Baseline Model
+
+## Final Model
+
+## Fairness Analysis
