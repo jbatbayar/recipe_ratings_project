@@ -233,7 +233,7 @@ I ran a permutation test by shuffling the missingness label of review for 1000 t
 I will be performing a permutation test with the following hypotheses, test statistic, and significance level:
 
 - **Null Hypothesis:** The ratings of recipes with more and less calories than mean are from the same distibution.
-- **Alternate Hypothesis:**: The mean rating of recipes with calories lower than the mean is higher than the mean rating of recipes with calories greater than the mean.
+- **Alternate Hypothesis:** The mean rating of recipes with calories lower than the mean is higher than the mean rating of recipes with calories greater than the mean.
 - **Test Statistic:** Difference in group means (mean of ratings of recipes with calories more than average - mean of ratings of recipes with calories less than average)
 - **Significance level:** 0.01
 
