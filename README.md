@@ -54,6 +54,7 @@ I took a few steps to clean the data I have:
 
 2. Checked if the data types of columns in the merged dataset are suitable.
    Here are the data types for all columns:
+   
    | Column	| Description |
 | :-------- | :----------- |
 | `'name'`	| object |
@@ -74,18 +75,18 @@ I took a few steps to clean the data I have:
 |`'rating'`	| float64 |
 | `'review'` | object |
 
-3. Filled ratings of 0 with np.nan as ratings range from 1 to 5.
+4. Filled ratings of 0 with np.nan as ratings range from 1 to 5.
 We would be able to get a good 'avg_rating' estimate as it will ignore np.Nan as default when calculating. If ratings were kept as 0s, it would have affected the average rating for a recipe when it shouldn't have been included.
 
-4. Found avg_rating per recipe, as a Series
+5. Found avg_rating per recipe, as a Series
 
-5. Added `'avg_rating'` Series back to the dataset by merging.
+6. Added `'avg_rating'` Series back to the dataset by merging.
 
-6. Converted `'submitted'` and  `'date'`, which were objects into datetime.
+7. Converted `'submitted'` and  `'date'`, which were objects into datetime.
 
-7. Turned `'nutrition'` column from string into list.
+8. Turned `'nutrition'` column from string into list.
 
-8. Created `'calories'` column in the dataset, taking the first element of each record in the `'nutrition'` column.
+9. Created `'calories'` column in the dataset, taking the first element of each record in the `'nutrition'` column.
 
 
 As a result of these 8 data cleaning steps, the dataframe now has 234429 rows and 19 columns, with each column in a most appropriate data type. Here are the first 5 rows of my cleaned dataset with the most relevant columns for my question:
@@ -178,7 +179,7 @@ For this step, I will be examining if the missingness of the `'review'` column i
   I believed that whether or not a user writes a review on a recipe depends on their satisfaction with the recipe. User might write a review if their experience was extreme (either rating 1 or 5) and might choose not to write anything because their experience was nothing out of normal. This is why I chose `'avg_rating'` as a column that `'review'`'s missingness depends on.
   - ***Null Hypothesis:*** Missingness of reviews does not depend on the calories of the recipe.
   - ***Alternate Hypothesis:*** Missingness of reviews does depend on the calories of the recipe.
-  - ***TestStatistic:*** Difference of means in the `'calories'` of the distribution of the group with missing reviews (`'missing_review'` == True) and the distribution of the group without missing reviews (`'missing_review'` == False).
+  - ***Test Statistic:*** Difference of means in the `'calories'` of the distribution of the group with missing reviews (`'missing_review'` == True) and the distribution of the group without missing reviews (`'missing_review'` == False).
   - ***Significance Level:*** 0.05
 
   Here is the table with average ratings in each group.
@@ -204,11 +205,12 @@ For this step, I will be examining if the missingness of the `'review'` column i
   
   - ***Null Hypothesis:*** Missingness of reviews does not depend on the time taken for the recipe.
   - ***Alternate Hypothesis:*** Missingness of reviews does depend on the time taken for the recipe.
-  - ***TestStatistic:*** Difference of means in the `'minutes'` of the distribution of the group with missing reviews (`'missing_review'` == True) and the distribution of the group without missing reviews (`'missing_review'` == False).
+  - ***Test Statistic:*** Difference of means in the `'minutes'` of the distribution of the group with missing reviews (`'missing_review'` == True) and the distribution of the group without missing reviews (`'missing_review'` == False).
   - ***Significance Level:*** 0.05
 
-Here is the table with average time taken in each group:
-| missing_review   |   minutes |
+   Here is the table with average time taken in each group:
+  
+  | missing_review   |   minutes |
 |:-----------------|:----------|
 | False            |   106.781 |
 | True             |   140.345 |
@@ -232,7 +234,7 @@ I will be performing a permutation test with the following hypotheses, test stat
 
 - **Null Hypothesis:** The ratings of recipes with more and less calories than mean are from the same distibution.
 - **Alternate Hypothesis:**: The mean rating of recipes with calories lower than the mean is higher than the mean rating of recipes with calories greater than the mean.
-- **Test statistic:** Difference in group means (mean of ratings of recipes with calories more than average - mean of ratings of recipes with calories less than average)
+- **Test Statistic:** Difference in group means (mean of ratings of recipes with calories more than average - mean of ratings of recipes with calories less than average)
 - **Significance level:** 0.01
 
 Using the `'more_than_mean'` column from the Bivariate analysis and `'rating'` from our dataset, I computed the difference in mean ratings 1000 times. The observed statistic, mean rating of recipes with calories higher than average - mean rating of recipes with calories higher than average, was -0.019303469126112027.
@@ -250,19 +252,64 @@ As a result, I had a p-value of **1.0**. This was much higher than my significan
 ---
 ## Framing a Prediction Problem
 
+I plan to predict the **rating (1, 2, 3, 4, or 5) a recipe received**. This is a classification problem, and since there are more than 2 classes for the model to classify, I will be building a multi-class RandomForestClassifier.
 
+Response variable: `'rating'`, which is an ordinal categorical variable
+   Rating is something that represent the whole recipe, whether if the recipe was good or bad for a user. With a merged dataset     of recipe informations and ratings, it made sense to predict the rating a recipe might receive depending on features of the      recipe.
+
+Evaluation metric: F1-score
+I thought that we should not consider recall or precision more important than the other, that they're both equally important. In our lecture, it was said that accuracy is misleading in the presence of class balance. When I performed value_counts() on the merged dataset's `'rating'` column, 169676 out of 219393 (non-null) records were rated 5, which takes up about 77.3%. This shows that the `'rating'` class is imbalanced, and that F-1 scores are a more appropriate metric for this model.  
+
+The information I currently possess is the merged dataset I cleaned, so all columns of this dataset could be used as features.
 
 ---
 ## Baseline Model
 
+I am building a RandomForestClassifier for my baseline model. I will be using `'minutes'`, a quantitative column, and `'many_ingredients'`, a Boolean column. When I ran a .corr() on the dataset, the only column with a positive correlation with the `'rating'` column was `'minutes'`. `'many_ingredients'` is a column I made from `'n_ingredients'`, and it contains True for rows which has `'n_ingredients'` > 15 and False for those that are not. As we saw in *Interesting Aggregates* , `'n_ingredients'` ranges from 1 to 37, so 15 as a threshold seems like a suitable value. As mentioned above, the `'rating'` column contains missing values, so I performed probabilistic imputation on the column before building the model.
 
+I kept the values of '`minutes'` feature the same while one hot encoding the categorical column '`many_ingredients'` since it's a nominal feature. 
+
+For this model, the weighted F-1 score came out to be **0.66**.
 
 ---
 ## Final Model
 
+For this final model, on top of the current 2 features, I added 2 new features: `'calories'` and `'n_steps'`. I kept `'many_ingredients'` one hot encoded, but transformed `'minutes'`.
 
+>`'minutes'`
+As mentioned before, this is the only column out of the datas I had that has positive correlation with `'rating'`, meaning that rating increased as time taken for a recipe increased. I believe that this feature would be helpful when predicting a rating of a recipe. This column has many extreme values, with 1.05 million as a value at maximum. So I used the `RobustScaler` transformer for this final model, which handles outliers effectively in numerical features.
+
+>`'many_ingredients'`
+Column has binary values depending on whether recipe used more than 15 ingredients or not. I decided to keep it the same as the baseline model, where I transformed the column by `OneHotEncoder`.
+
+>`'calories'`
+I found out that ratings tend to be higher for recipes with lower calories. Since the initial purpose of this project was to investigate the relationship between calories and ratings, I believed that the `'calories'` column could be an important feature to predict ratings. From the *Univariate analysis* above, we saw that `'calories'` has a lot of extreme values, some recipes had 10000+ calories for instance. Because of this, I used `RobustScaler` again for this feature.
+ 
+>`'n_steps'`
+With a bivariate analysis, I found out that these 2 columns have a negative correlation. Column has values up to 100, which is not that extreme (it makes sense that a recipe can take up to 100 steps), so I used the `StandardScaler` to standardize the values for this feature.
+
+I started with a `RandomForestClassifier(n_estimators=100, criterion='entropy'))`
+I used `GridSearchCV` to find the best hyperparameters of `max_depth` and `min_samples_split`, which I chose to 
+
+The final weighted F-1 score came out to be **0.67**, which is an increase by 0.01 from the baseline model.
 
 ---
 ## Fairness Analysis
 
+For this final step, I wanted to **check if my model performed worse for individuals where `'n_steps'` is greater or equal to 15 than it does for individuals where `'n_steps'` is lower than 15**. 
 
+My evaluation metric the recall parity because I want to ensure that the model equally captures true high ratings (True Positives) for both of the groups and recall measures the ratio of true positives to the total number of actual positives.
+
+False negatives (Predicted Negative, Actually Positive) would be dangerous because for a user, if they got a bad rating for a recipe as a prediction, when it was actually a high-rated one, they would avoid trying that recipe, therefore losing the opportunity to try out a good recipe. Since a high rating would implicitly mean a good recipe, labeling a recipe bad when it was not is not ideal.
+
+- **Null Hypothesis:** This model is fair. It performs the same for groups where `'n_steps'` >= 15 and `'n_steps'` < 15.
+- **Alternate Hypothesis:**: Model is unfair.
+- **Test Statistic:** Difference in recall score (n_ingredients >= 15 - n_ingredients < 15)
+- **Significance level:** 0.01
+
+The observed difference in recall score was 0.018382031906093.
+
+I performed 1000 permutations, collecting the difference in recall scores after shuffling the `'few_steps'` column.
+
+
+The p-value was 0, which is lower than my significance level of 0.01, so I **rejected** the null hypothesis. The difference in recall between the 2 groups is statistically significant.
