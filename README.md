@@ -246,7 +246,7 @@ Using the `'more_than_mean'` column from the Bivariate analysis and `'rating'` f
   frameborder="0"
 ></iframe>
 
-As a result, I had a p-value of **1.0**. This was much higher than my significance level 0.01, so I **failed to reject** my null hypothesis. I don't have sufficient evidence to conclude that users are favorable towards recipes with lower calories compared to recipes with higher calories.
+As a result, I had a p-value of **1.0**. This was much higher than my significance level 0.01, so I **failed to reject** my null hypothesis. I failed to reject that the two groups are from the same distribution, and I don't have sufficient evidence to conclude that users are favorable towards recipes with lower calories compared to recipes with higher calories.
 
 
 ---
