@@ -29,6 +29,7 @@ Dataset `recipes` has 83782 rows with 12 columns, each row containing informatio
 | `'n_ingredients'` | Number of ingredients in recipe |
 
 
+
 Dataset `interactions` contains 731927 rows with 5 columns, each row containing a review and rating by users for a recipe.
 
 | Column	| Description |
@@ -39,6 +40,7 @@ Dataset `interactions` contains 731927 rows with 5 columns, each row containing 
 |`'rating'`	| Rating given |
 | `'review'` | Review text |
 
+
 This project delves into these datasets to investigate a compelling question: **Do people tend to rate high-calorie recipes more favorably than their low-calorie counterparts?** This is a significant question because while recipes high in calories might be preferred over low-calorie recipes by a lot of people, the health concern the choices bring is worth considering.
 
 The the most relevant column for this investigation is definitely the `'calories (#)'` value in the `'nutrition'` column. I disregarded all the remaining values from the column. Other relevant columns would be `'rating'` and `'avg_rating'`.  
@@ -48,11 +50,11 @@ The the most relevant column for this investigation is definitely the `'calories
 I took a few steps to clean the data I have:
 
 1. Left merged `recipes` dataset with `interactions` on `'id'` (`recipes`) and `'recipe_id'` for `interactions`.
-   - Merged dataset now has 234429 rows with 17 columns.
+   Merged dataset now has 234429 rows with 17 columns.
 
 2. Checked if the data types of columns in the merged dataset are suitable.
-   - Here are the data types for all columns:
-   - | Column	| Description |
+   Here are the data types for all columns:
+   | Column	| Description |
 | :-------- | :----------- |
 | `'name'`	| object |
 | `'id'`	| int64 |
@@ -89,7 +91,7 @@ We would be able to get a good 'avg_rating' estimate as it will ignore np.Nan as
 As a result of these 8 data cleaning steps, the dataframe now has 234429 rows and 19 columns, with each column in a most appropriate data type. Here are the first 5 rows of my cleaned dataset with the most relevant columns for my question:
 
 | name | id |  minutes  |  submitted  |   n_steps |   n_ingredients |   rating |   avg_rating |   calories |
-|:-------------------------------------|-------:|----------:|:--------------------|----------:|----------------:|---------:|-------------:|-----------:|
+|:-------------------------------------|:-------|:----------|:--------------------|:----------|:---------------|:---------|:------------|:-----------|
 | 1 brownies in the world    best ever | 333281 |        40 | 2008-10-27 00:00:00 |        10 |               9 |        4 |            4 |      138.4 |
 | 1 in canada chocolate chip cookies   | 453467 |        45 | 2011-04-11 00:00:00 |        12 |              11 |        5 |            5 |      595.1 |
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 |         6 |               9 |        5 |            5 |      194.8 |
@@ -121,7 +123,7 @@ For this analysis, I looked at the relationship between calories and ratings. I 
 I looked into the relationship between the number of ingredients a recipe requires (`'n_ingredients'`), which ranged from 1 to 37, and the amount of calories it had. The pivot table below is indexed by `'n_ingredients'`, with columns as `'rating'`, and with values as mean calories. There's a trend where the the average calories increase when the number of ingredients increase. And for the same `'n_ingredients'`, the mean amount of calories is usually higher in `'rating'` of 1 than in `'rating'`of 5.
 
 |   n_ingredients |      1.0 |      2.0 |      3.0 |      4.0 |       5.0 |
-|----------------:|---------:|---------:|---------:|---------:|----------:|
+|:---------------|---------:|---------:|---------:|---------:|----------:|
 |               1 |  nan     |  199.5   |  136.05  |  758.68  |  1263.21  |
 |               2 |  732.766 |  349.979 |  292.772 |  347.403 |   390.09  |
 |               3 |  419.622 |  329.928 |  335.446 |  268.41  |   276.888 |
@@ -174,11 +176,10 @@ For this step, I will be examining if the missingness of the `'review'` column i
 - Calories and Review
 
   I believed that whether or not a user writes a review on a recipe depends on their satisfaction with the recipe. User might write a review if their experience was extreme (either rating 1 or 5) and might choose not to write anything because their experience was nothing out of normal. This is why I chose `'avg_rating'` as a column that `'review'`'s missingness depends on.
-
-  ***Null Hypothesis:*** Missingness of reviews does not depend on the calories of the recipe.
-  ***Alternate Hypothesis:*** Missingness of reviews does depend on the calories of the recipe.
-  ***TestStatistic:*** Difference of means in the `'calories'` of the distribution of the group with missing reviews (`'missing_review'` == True) and the distribution of the group without missing reviews (`'missing_review'` == False).
-  ***Significance Level:*** 0.05
+  - ***Null Hypothesis:*** Missingness of reviews does not depend on the calories of the recipe.
+  - ***Alternate Hypothesis:*** Missingness of reviews does depend on the calories of the recipe.
+  - ***TestStatistic:*** Difference of means in the `'calories'` of the distribution of the group with missing reviews (`'missing_review'` == True) and the distribution of the group without missing reviews (`'missing_review'` == False).
+  - ***Significance Level:*** 0.05
 
   Here is the table with average ratings in each group.
   
@@ -197,14 +198,14 @@ For this step, I will be examining if the missingness of the `'review'` column i
   frameborder="0"
 ></iframe>
 
-  The p-value was 0.003, and since it is lower than our significance level 0.05, we reject the null hypothesis. The missingness of `'review'` does depend on `'calories'` column.
+  The p-value was 0.003, and since it is lower than our significance level 0.05, we **reject** the null hypothesis. The missingness of `'review'` does depend on `'calories'` column.
   
 - Time taken and Review
   
-  ***Null Hypothesis:*** Missingness of reviews does not depend on the time taken for the recipe.
-  ***Alternate Hypothesis:*** Missingness of reviews does depend on the time taken for the recipe.
-  ***TestStatistic:*** Difference of means in the `'minutes'` of the distribution of the group with missing reviews (`'missing_review'` == True) and the distribution of the group without missing reviews (`'missing_review'` == False).
-  ***Significance Level:*** 0.05
+  - ***Null Hypothesis:*** Missingness of reviews does not depend on the time taken for the recipe.
+  - ***Alternate Hypothesis:*** Missingness of reviews does depend on the time taken for the recipe.
+  - ***TestStatistic:*** Difference of means in the `'minutes'` of the distribution of the group with missing reviews (`'missing_review'` == True) and the distribution of the group without missing reviews (`'missing_review'` == False).
+  - ***Significance Level:*** 0.05
 
 Here is the table with average time taken in each group:
 | missing_review   |   minutes |
@@ -223,18 +224,23 @@ I ran a permutation test by shuffling the missingness label of review for 1000 t
 ></iframe>
 
 
-  The p-value was 0.092, and it is higher than our significance level 0.05, so we fail to reject the null hypothesis. We do not have enough evidence to reject that the missingness of `'review'` is dependent on `'minutes'`.
+  The p-value was 0.092, and it is higher than our significance level 0.05, so we **fail to reject** the null hypothesis. We do not have enough evidence to reject that the missingness of `'review'` is dependent on `'minutes'`.
 
 ---
 ## Hypothesis Testing
 I will be performing a permutation test with the following hypotheses, test statistic, and significance level:
 
-**Null Hypothesis:** The ratings of recipes with more and less calories than mean are from the same distibution.
-**Alternate Hypothesis:**: The mean rating of recipes with calories lower than the mean is higher than the mean rating of recipes with calories greater than the mean.
-**Test statistic:** Difference in group means (mean of ratings of recipes with calories more than average - mean of ratings of recipes with calories less than average)
-**Significance level:** 0.01
+- **Null Hypothesis:** The ratings of recipes with more and less calories than mean are from the same distibution.
+- **Alternate Hypothesis:**: The mean rating of recipes with calories lower than the mean is higher than the mean rating of recipes with calories greater than the mean.
+- **Test statistic:** Difference in group means (mean of ratings of recipes with calories more than average - mean of ratings of recipes with calories less than average)
+- **Significance level:** 0.01
 
-Using the `'more_than_mean'` column from the Bivariate analysis and `'rating'` from our dataset, I computed the difference in mean ratings 1000 times. 
+
+Using the `'more_than_mean'` column from the Bivariate analysis and `'rating'` from our dataset, I computed the difference in mean ratings 1000 times. The observed statistic, mean rating of recipes with calories higher than average - mean rating of recipes with calories higher than average, was -0.019303469126112027.
+
+
+As a result, I had a p-value of **1.0**. This was much higher than my significance level 0.01, so I **failed to reject** my null hypothesis.
+
 
 ---
 ## Framing a Prediction Problem
