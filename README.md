@@ -235,11 +235,16 @@ I will be performing a permutation test with the following hypotheses, test stat
 - **Test statistic:** Difference in group means (mean of ratings of recipes with calories more than average - mean of ratings of recipes with calories less than average)
 - **Significance level:** 0.01
 
-
 Using the `'more_than_mean'` column from the Bivariate analysis and `'rating'` from our dataset, I computed the difference in mean ratings 1000 times. The observed statistic, mean rating of recipes with calories higher than average - mean rating of recipes with calories higher than average, was -0.019303469126112027.
 
+<iframe
+  src="assets/hypo.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
-As a result, I had a p-value of **1.0**. This was much higher than my significance level 0.01, so I **failed to reject** my null hypothesis.
+As a result, I had a p-value of **1.0**. This was much higher than my significance level 0.01, so I **failed to reject** my null hypothesis. I don't have sufficient evidence to conclude that users are favorable towards recipes with lower calories compared to recipes with higher calories.
 
 
 ---
