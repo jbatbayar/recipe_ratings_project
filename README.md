@@ -288,10 +288,10 @@ I found out that ratings tend to be higher for recipes with lower calories. Sinc
 >`'n_steps'`
 With a bivariate analysis, I found out that these 2 columns have a negative correlation. Column has values up to 100, which is not that extreme (it makes sense that a recipe can take up to 100 steps), so I used the `StandardScaler` to standardize the values for this feature.
 
-I started with a `RandomForestClassifier(n_estimators=100, criterion='entropy'))`
-I used `GridSearchCV` to find the best hyperparameters of `max_depth` and `min_samples_split`, which I chose to 
+I started with a `RandomForestClassifier(max_depth = None, n_estimators=100, criterion='entropy'))`
+I used `GridSearchCV` to find the best hyperparameters of `max_depth` and `min_samples_split`, and the best combination of the hyperparameters were 30 for `max_depth` and 20 for `min_samples_split`. I noticed that the lowest value of max_depth and the highest value of min_samples_split were chosen, which shows that they worked to decrease the variance of the decision tree that is high in variance.
 
-The final weighted F-1 score came out to be **0.67**, which is an increase by 0.01 from the baseline model.
+The final weighted F-1 score came out to be **0.68**, which is an increase by 0.02 from the baseline model.
 
 ---
 ## Fairness Analysis
@@ -311,5 +311,11 @@ The observed difference in recall score was 0.018382031906093.
 
 I performed 1000 permutations, collecting the difference in recall scores after shuffling the `'few_steps'` column.
 
+<iframe
+  src="assets/fairness.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 The p-value was 0, which is lower than my significance level of 0.01, so I **rejected** the null hypothesis. The difference in recall between the 2 groups is statistically significant.
