@@ -4,7 +4,7 @@ By Jessica Batbayar(jbatbayar@ucsd.edu)
 ---
 ## Introduction
 
-In this data science project, we delve into the intricate relationship between the rating of recipes and their caloric content. By analyzing a diverse dataset of culinary creations, our goal is to uncover patterns and correlations that may exist between the popularity or rating of a recipe and its nutritional value, specifically the number of calories. Through this exploration, we aim to provide insights that can inform healthier recipe choices while still appealing to taste preferences, potentially aiding in better dietary decisions and contributing to the broader understanding of how caloric content impacts culinary appreciation.
+In this data science project, we delve into the intricate relationship between the rating of recipes and their caloric content. By analyzing a diverse dataset of culinary creations, our goal is to uncover patterns and correlations that may exist between the popularity or rating of a recipe and its nutritional value, specifically the number of calories. 
 
 One common observation is that the foods we often crave and repeatedly enjoy tend to be those with higher calorie content. Personally, I have noticed that the recipes I find most satisfying and return to frequently are typically richer in calories compared to what I eat normally. 
 This subjective experience raises an interesting hypothesis—perhaps the pleasure derived from high-calorie foods translates into higher ratings for such recipes on a broader scale.
