@@ -276,16 +276,16 @@ For this model, the weighted F-1 score came out to be **0.66**.
 
 For this final model, on top of the current 2 features, I added 2 new features: `'calories'` and `'n_steps'`. I kept `'many_ingredients'` one hot encoded, but transformed `'minutes'`.
 
->`'minutes'`
+-`'minutes'`
 As mentioned before, this is the only column out of the datas I had that has positive correlation with `'rating'`, meaning that rating increased as time taken for a recipe increased. I believe that this feature would be helpful when predicting a rating of a recipe. This column has many extreme values, with 1.05 million as a value at maximum. So I used the `RobustScaler` transformer for this final model, which handles outliers effectively in numerical features.
 
->`'many_ingredients'`
+-`'many_ingredients'`
 Column has binary values depending on whether recipe used more than 15 ingredients or not. I decided to keep it the same as the baseline model, where I transformed the column by `OneHotEncoder`.
 
->`'calories'`
+-`'calories'`
 I found out that ratings tend to be higher for recipes with lower calories. Since the initial purpose of this project was to investigate the relationship between calories and ratings, I believed that the `'calories'` column could be an important feature to predict ratings. From the *Univariate analysis* above, we saw that `'calories'` has a lot of extreme values, some recipes had 10000+ calories for instance. Because of this, I used `RobustScaler` again for this feature.
  
->`'n_steps'`
+-`'n_steps'`
 With a bivariate analysis, I found out that these 2 columns have a negative correlation. Column has values up to 100, which is not that extreme (it makes sense that a recipe can take up to 100 steps), so I used the `StandardScaler` to standardize the values for this feature.
 
 I started with a `RandomForestClassifier(max_depth = None, n_estimators=100, criterion='entropy'))`
